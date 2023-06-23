@@ -36,8 +36,6 @@ body{
     border-radius: 3px;
   }
   
- 
-
 
 
 
@@ -304,4 +302,9 @@ body{
         max-width: 60vw;
     }
 }
-
+@media screen and(min-width: 992px){
+.navbar-expand-lg .navbar-collapse {
+    display: flex!important;
+    flex-basis: auto;
+    justify-content: end;
+}}

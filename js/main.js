@@ -79,7 +79,7 @@ window.onload=function(){
     popup.classList.add("active");
     nav.style.filter='blur(5px)'
     container.style.filter='blur(5px)'
-  }, 3000);
+  }, 1500);
 }
 
 
@@ -190,7 +190,7 @@ filtersinput.forEach(filter=>{
         alert("Saturate, sepia, Brightness and contrast , value should be between 0 to 200")
         sturate.value="100";
         contrast.value="100";
-        sepia.value="100";
+        sepia.value="0";
         brightness.value="100";
         sattnum.value="100";
         contnum.value="100";
@@ -246,13 +246,14 @@ insertinput.forEach(filter=>{
   filter.addEventListener("input",function(){
     
        
-       console.log(greynum.value);
+       console.log(sepnum.value);
+       console.log(sepia.value);
        if(sepnum.value>200 || sepnum.value<0|| sattnum.value>200 || sattnum.value<0 || contnum.value>200 || contnum.value<0|| brightnum.value>200 || brightnum.value<0 ){
         alert("Saturate, sepia, Brightness and contrast , value should be between 0 to 200")
        
         sturate.value="100";
         contrast.value="100";
-        sepia.value="100";
+        sepia.value="0";
         brightness.value="100";
         sattnum.value="100";
         contnum.value="100";
