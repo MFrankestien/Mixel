@@ -38,7 +38,8 @@ let email = document.forms["form"]['email'];
 let password = document.forms["form"]['password'];
 let emailerror=document.getElementById('email_error');
 let passworderror=document.getElementById('password_error');
-letuser=false;
+let user=false;
+let signinbtn = document.getElementById("signinbtn");
 let rotate = 0,flipHorizontal = 1, flipVertical = 1 ,sat=100, cont=100,
 
 bright=100, sep=0,grey=0,blu=0;
@@ -76,13 +77,11 @@ window.onload=function(){
   
 
   setTimeout(function(){
-    popup.classList.add("active");
-    nav.style.filter='blur(5px)'
-    container.style.filter='blur(5px)'
-  }, 1500);
+    popupactive();
+  }, 1300);
 }
 
-
+signinbtn.addEventListener("click",popupactive);
 
 
 //close popup login form
@@ -97,6 +96,8 @@ closepopup.addEventListener("click",function(){
 
 });
 
+
+//darkmode
 darkmode.onclick=function(){
 
   if(darkmodeText.innerHTML=='Dark'){
@@ -115,7 +116,7 @@ darkmode.onclick=function(){
 
 }
 
-
+//upload image
 upload.onchange=function(){
   resetValues();
   download.style.display="block";
@@ -427,6 +428,14 @@ function login(){
   nav.style.filter='none'
   container.style.filter='none'
   console.log(user);
+}
+
+//popup function
+function popupactive(){
+  popup.classList.add("active");
+  popup.style.display="block";
+    nav.style.filter='blur(5px)'
+    container.style.filter='blur(5px)'
 }
 
 
