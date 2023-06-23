@@ -5,9 +5,20 @@ font-family: sans-serif;
 
 }
 
+:root{
+  --primary-color:#222;
+  --secondary-color:#333; 
+  
+}
+
+[data-theme="light"]{
+  --primary-color:#eee;
+  --secondary-color:#fff;
+}
+
 body{
     display: flex;
-    background-color: #333;
+    background-color: var(--secondary-color);
     justify-content: center;
     flex-direction: column;
 }
@@ -15,7 +26,7 @@ body{
 
 
 .navbar{
-    background-color: #222; 
+    background-color: var(--primary-color); 
    
   }
   
@@ -25,35 +36,8 @@ body{
     border-radius: 3px;
   }
   
-  
-  .navbar-nav .nav-link {
-    color: #6C757D;
-    
-  }
-  
-  .navbar-nav .nav-link.active, 
-  .navbar-nav .nav-link:hover {
-    background: transparent;
-    color: #fff;
-    border-radius: 3px;
-}
-.nav-link {
-    color: #6C757D;
-    
-    margin: 5px;
-}
-.nav-link:hover{
-    color: #fff;
-    background: #6C757D;
-    border-radius: 3px;
-}
+ 
 
-.center{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-}
 
 
 
@@ -67,14 +51,14 @@ body{
     cursor: pointer;
     font-size: 15px;
    border-radius: 16px;
-    background: #222;
+    background: var(--primary-color);
     color: #6C757D;
     border: 1px solid #6C757D;
     outline: none;
 }
 
  .popup{
-    position: absolute;
+    position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%) scale(1.25);
@@ -85,13 +69,14 @@ body{
     opacity: 0;
     width: 380px;
     padding: 20px 30px;
-    background: #fff;
+    background: white;
     box-shadow: 2px 2px 5px rgba(0,0,0,0.15);
     border-radius: 10px;
  }
 
  .popup.active{
     top: 50%;
+    z-index: 10;
     transform: translate(-50%,-50%) scale(1);
     opacity: 1;
     transition: top 0ms ease-in-out 0ms,
@@ -117,7 +102,7 @@ body{
     font-size: 25px;
     margin: 10px 0px 20px;
     text-align: center;
-    color: #222;
+    
 
  }
 
@@ -142,7 +127,7 @@ body{
 
  .popup .formm .form-element label{
     font-size: 14px; 
-    color: #222;
+    
 
  }
 
@@ -155,7 +140,6 @@ body{
     padding: 10px;
     outline: none;
     font-size: 14px; 
-    color: #222;
     border: 1px solid #aaa;
     border-radius: 5px;
 
@@ -182,7 +166,7 @@ body{
 
 
 .container{
-    background-color: #222;
+    background-color: var(--primary-color);
     margin: auto;
     margin-top:10vh;
     margin-bottom:20vh;
@@ -204,10 +188,13 @@ body{
     align-items: center;
     padding: 20px
 }
+.img-box {
+  margin-top: 10vh;
+}
 
 .img img,canvas{
     max-width: 45vw;
-    max-height: 60vh;
+    max-height: 45vh;
 }
 
 .controls{

@@ -1,6 +1,9 @@
+
 let darkmode =document.getElementById("darkmode");
 let darkmodeText =document.getElementById("darkmodeText");
 let darkmodeImg =document.getElementById("darkmodeImg");
+let container= document.querySelector(".container");
+let nav=document.querySelector(".navbar"); 
 let fileInput = document.querySelector(".file-input");
 chooseImgBtn = document.querySelector(".choose-img");
 let sturate= document.getElementById("saturate");
@@ -35,11 +38,12 @@ let email = document.forms["form"]['email'];
 let password = document.forms["form"]['password'];
 let emailerror=document.getElementById('email_error');
 let passworderror=document.getElementById('password_error');
-
+letuser=false;
 let rotate = 0,flipHorizontal = 1, flipVertical = 1 ,sat=100, cont=100,
+
 bright=100, sep=0,grey=0,blu=0;
-console.log(filtersinput);
-console.log(insertinput);
+console.log(nav);
+console.log(container);
 console.log(brightness);
 console.log(sepnum);
 console.log(greynum);
@@ -73,6 +77,8 @@ window.onload=function(){
 
   setTimeout(function(){
     popup.classList.add("active");
+    nav.style.filter='blur(5px)'
+    container.style.filter='blur(5px)'
   }, 3000);
 }
 
@@ -82,12 +88,30 @@ window.onload=function(){
 //close popup login form
 
 closepopup.addEventListener("click",function(){
-popup.classList.remove("active");
+  user=false;
+  popup.classList.remove("active");
+  nav.style.filter='none'
+  container.style.filter='none'
+  console.log(user);
+  popup.style.display='none';
+
 });
 
 darkmode.onclick=function(){
-  darkmodeText.innerHTML="Dark"
+
+  if(darkmodeText.innerHTML=='Dark'){
+     darkmodeText.innerHTML="light"
+  darkmodeImg.src="images/sun.png"
+  
+  document.documentElement.setAttribute('data-theme', 'dark');
+
+
+  }else{
+    darkmodeText.innerHTML="Dark"
   darkmodeImg.src="images/moon.png"
+  document.documentElement.setAttribute('data-theme', 'light');
+  }
+ 
 
 }
 
@@ -126,7 +150,10 @@ upload.onchange=function(){
 
 form.addEventListener('submit',function (params) {
   params.preventDefault();
-  validate();
+  let result=validate();
+  if(result != false){
+    login();
+  }
 });
 
 email.addEventListener('textInput',email_verify);
@@ -293,6 +320,9 @@ function resetValues(){
   sepia.value='0';
   grayscale.value='0';
   blurr.value='0';
+  img.style.transform = `rotate(${0}deg) scale(${1}, ${1})`;
+
+
   
 }
 
@@ -360,35 +390,44 @@ download.onclick=function(){
      
      
      `;
-    
-    console.log(grayscale.value);
-    
-
+  
     ctx.scale(flipHorizontal, flipVertical);
     ctx.translate(canvas.width / 2, canvas.height / 2);
-    if(rotate !== 0) {
-      ctx.rotate((rotate * Math.PI) / 180);
-  }
-    ctx.drawImage(img, -img.width / 2, -img.height / 2, );
+  ctx.rotate(rotate* Math.PI / 180); 
+  
     
-
-    ctx.font = '30px Arial';
-      ctx.fillStyle = 'rgba(0, 0, 1, 1)';
+  ctx.drawImage(img, -canvas.width / 2, -canvas.height / 2, canvas.width, canvas.height);
+    if(user!=true){
+      ctx.font = '20px Arial';
+      ctx.fillStyle = '#222';
       const watermarkText = 'Mixel';
       
       const textWidth = ctx.measureText(watermarkText).width;
-      const x = (canvas.width - textWidth) / 12;
+      const x = (canvas.width - textWidth) / 15;
       const y = canvas.height / 3;
       
       ctx.fillText(watermarkText, x, y);
+    }
 
 
     img.style.display='block';
-    canvas.style.display="none"
+    canvas.style.opacity="0";
+   
 
   download.href=canvas.toDataURL();
 
 }
+
+// Log in 
+function login(){
+  user=true;
+  popup.classList.remove("active");
+  popup.style.display='none';
+  nav.style.filter='none'
+  container.style.filter='none'
+  console.log(user);
+}
+
 
 reset.addEventListener("click",()=>resetValues());
 chooseImgBtn.addEventListener("click", () => fileInput.click());
